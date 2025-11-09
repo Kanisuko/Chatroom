@@ -1,0 +1,57 @@
+/* web/static/css/_chat.css (最终修复版) */
+
+.chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-bg-tertiary);
+    min-width: 0; 
+    
+    /* 
+     * **最终修复点**: 明确将 .chat 容器设置为定位上下文。
+     * 这样，内部所有 position: absolute 的子元素 (如 header 和 input-area)
+     * 都会相对于 .chat 来定位，而不是整个页面。
+     */
+    position: relative; 
+}
+
+/* 聊天头部 - 现在将相对于 .chat 定位 */
+.chat__header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2; /* 确保在消息列表之上 */
+    
+    height: 48px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--elevation-low);
+    background-color: var(--color-bg-tertiary); /* 遮挡下方滚动内容 */
+}
+
+/* 消息容器 */
+.chat__messages-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column-reverse;
+    overflow-y: auto;
+    min-height: 0;
+    
+    /* 为绝对定位的 header 和 input-area 留出空间 */
+    padding: 48px 16px 90px 16px;
+}
+
+/* 消息输入区域 - 现在将相对于 .chat 定位 */
+.chat__input-area {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2; /* 确保在消息列表之上 */
+
+    padding: 0 16px 24px;
+    background-color: var(--color-bg-tertiary);
+}

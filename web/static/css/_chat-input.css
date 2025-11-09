@@ -1,0 +1,63 @@
+/* web/static/css/_chat-input.css */
+
+.chat__input-area {
+    padding: 0 16px 24px;
+    flex-shrink: 0; /* 保留以防止输入框自身被压缩 */
+
+    /* **修复点**: 使用绝对定位将其固定在 .chat 容器的底部 */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2; /* 确保在消息容器之上 */
+    background-color: var(--color-bg-tertiary); /* 确保有背景色 */
+}
+
+.chat__input-wrapper {
+    background-color: var(--color-bg-accent);
+    border-radius: var(--border-radius-md);
+    padding: 0 4px 0 16px;
+    display: flex;
+    align-items: flex-end; /* 当输入框多行时，保持附件按钮在底部对齐 */
+    border: 1px solid var(--color-bg-primary);
+    transition: border-color 0.15s ease;
+    padding-bottom: 8px; /* 给多行输入框一点呼吸空间 */
+}
+
+.chat__input-wrapper:focus-within {
+    border-color: var(--color-accent-primary);
+}
+
+.chat__attach-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: color 0.15s ease;
+    flex-shrink: 0;
+    margin-right: 8px;
+}
+
+.chat__message-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--color-text-normal);
+    font-size: 16px;
+    padding: 12px 0;
+    resize: none;
+    max-height: 200px;
+    line-height: 1.375;
+    font-family: var(--font-primary);
+    outline: none;
+}
+
+.chat__message-input::placeholder {
+    color: var(--color-text-muted);
+}

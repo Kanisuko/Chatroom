@@ -1,0 +1,115 @@
+/* web/static/css/_user-sidebar.css */
+
+.user-sidebar {
+    width: 240px;
+    background-color: var(--color-bg-secondary);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    padding: 10px 8px;
+}
+
+.user-sidebar__header {
+    height: 36px;
+    padding: 0 8px;
+    margin-bottom: 4px;
+}
+
+.user-sidebar__title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    letter-spacing: 0.5px;
+}
+
+.user-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.user-list__group {
+    margin-bottom: 16px;
+}
+
+.user-list__group-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin: 16px 8px 4px;
+    font-weight: 600;
+}
+
+.user-list__item {
+    display: flex;
+    align-items: center;
+    padding: 6px 8px;
+    border-radius: var(--border-radius-md);
+    transition: background-color 0.15s ease;
+    cursor: pointer;
+}
+
+.user-list__item:hover {
+    background-color: var(--color-bg-modifier-hover);
+}
+
+.user-list__item-avatar-wrapper {
+    position: relative;
+    margin-right: 12px;
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+.user-list__item-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-list__item-status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    box-sizing: border-box;
+    display: block;
+    border: 2px solid var(--color-bg-secondary);
+    z-index: 10;
+}
+
+/* 状态颜色 */
+.user-list__item-status--online { background-color: var(--color-status-online); }
+.user-list__item-status--idle { background-color: var(--color-status-idle); }
+.user-list__item-status--dnd { background-color: var(--color-status-dnd); }
+.user-list__item-status--offline { background-color: var(--color-status-offline); }
+
+.user-list__item-name-wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.user-list__item-display-name {
+    font-size: 14px;
+    color: var(--color-text-normal);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+}
+
+/* 修改: 隐藏 username tag (请求1) */
+.user-list__item-username-tag {
+    /* font-size: 11px; */
+    /* color: var(--color-text-muted); */
+    /* white-space: nowrap; */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    /* line-height: 1.2; */
+    /* opacity: 0.8; */
+    display: none; /* 修改: 隐藏 username tag (请求1) */
+}

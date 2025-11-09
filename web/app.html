@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleChannel - App</title>
+    <!-- 外部库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 我们的样式 -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body data-ws-protocol="{{ ws_protocol }}">
+    <input type="file" id="avatar-upload-input" accept="image/jpeg,image/png,image/gif" style="display: none;">
+    <input type="file" id="file-upload-input" accept="*/*" style="display: none;">
+
+    <div class="app-container">
+        <!-- 左侧边栏: 服务器/频道列表 -->
+        <aside class="sidebar">
+            <div class="sidebar__logo">
+                <i class="sidebar__logo-icon fas fa-comments"></i> SimpleChannel
+            </div>
+            <div class="channel-list">
+                <div class="channel-list__header">
+                    <h3 class="channel-list__title">频道</h3>
+                    <button id="add-channel-btn" class="channel-list__add-btn"><i class="fas fa-plus"></i></button>
+                </div>
+                <!-- 频道将由 JS 动态填充 -->
+            </div>
+            <!-- 修改: 语音状态面板 -> 媒体控制中心 -->
+            <div class="voice-status-panel" id="voice-status-panel" style="display: none;">
+                <div class="voice-status-panel__info">
+                    <span id="voice-status-text" class="voice-status-panel__status-text">正在连接...</span>
+                    <span id="voice-channel-name" class="voice-status-panel__channel-name">general</span>
+                </div>
+                <div class="voice-status-panel__controls">
+                    <button id="camera-btn" class="voice-status-panel__control-btn" aria-label="开启摄像头">
+                        <i class="fas fa-video"></i>
+                    </button>
+                    <button id="screenshare-btn" class="voice-status-panel__control-btn" aria-label="共享屏幕">
+                        <i class="fas fa-desktop"></i>
+                    </button>
+                    <button id="voice-disconnect-btn" class="voice-status-panel__disconnect-btn" aria-label="断开连接">
+                        <i class="fas fa-phone-slash"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="user-panel">
+                <div class="user-panel__avatar-wrapper" id="current-user-avatar-wrapper">
+                    <img src="/static/assets/default_avatar.png" alt="User Avatar" id="current-user-avatar" class="user-panel__avatar">
+                    <span class="user-panel__status user-panel__status--offline" id="current-user-status"></span>
+                </div>
+                <div class="user-panel__info">
+                    <span class="user-panel__display-name" id="current-user-display-name">加载中...</span>
+                    <span class="user-panel__username-tag" id="current-user-username-tag" style="display: none;">#username</span>
+                </div>
+                <div class="user-panel__controls">
+                    <button id="microphone-btn" class="user-panel__control-btn" aria-label="静音麦克风"><i class="fas fa-microphone"></i></button>
+                    <button id="headphones-btn" class="user-panel__control-btn" aria-label="静音耳机"><i class="fas fa-headphones"></i></button>
+                    <!-- 移除: 屏幕共享按钮 -->
+                    <button id="user-settings-btn" class="user-panel__settings-btn" aria-label="用户设置"><i class="fas fa-cog"></i></button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 中间主区域: 聊天区域 -->
+        <main class="chat">
+            <header class="chat__header">
+                <div class="chat__header-info">
+                    <i class="chat__header-icon fas fa-hashtag"></i>
+                    <h3 class="chat__header-title channel-title">general</h3>
+                    <span class="chat__header-topic channel-topic">欢迎来到 SimpleChannel！</span>
+                </div>
+                <div class="chat__header-actions">
+                    <button id="pinned-messages-btn" class="chat-header__action-btn" aria-label="固定消息">
+                        <i class="fas fa-thumbtack"></i>
+                    </button>
+                    <button id="toggle-user-sidebar-btn" class="chat-header__action-btn active" aria-label="成员列表">
+                        <i class="fas fa-users"></i>
+                    </button>
+                </div>
+            </header>
+            <div id="stream-container" class="stream-container" style="display: none;"></div>
+            <div class="chat__messages-container messages-container">
+                <!-- 消息将由 JS 动态填充 -->
+            </div>
+            <div class="chat__input-area">
+                <div class="chat__input-wrapper">
+                    <button id="attach-file-btn" class="chat__attach-btn"><i class="fas fa-plus-circle"></i></button>
+                    <textarea class="chat__message-input message-input" placeholder="发送消息..." disabled></textarea>
+                </div>
+            </div>
+        </main>
+
+        <!-- 右侧边栏: 用户列表 -->
+        <aside class="user-sidebar">
+            <div class="user-sidebar__header">
+                <h3 class="user-sidebar__title">在线用户</h3>
+            </div>
+            <div class="user-list">
+                 <!-- 用户将由 JS 动态填充 -->
+            </div>
+        </aside>
+
+        <!-- 创建频道模态框 -->
+        <div id="create-channel-modal" class="modal">
+            <div class="modal__content">
+                <h2 class="modal__title">创建频道</h2>
+                <p class="modal__subtitle">为你的社区创建一个新天地</p>
+                <div class="modal__input-group">
+                    <label class="input-group__label">频道类型</label>
+                    <div class="channel-type-selector">
+                        <input type="radio" id="channel-type-text" name="channel-type" value="text" class="channel-type-selector__radio" checked>
+                        <label for="channel-type-text" class="channel-type-selector__label">
+                            <i class="fas fa-hashtag"></i>
+                            <div class="channel-type-selector__info">
+                                <span class="channel-type-selector__title">文本频道</span>
+                                <span class="channel-type-selector__desc">发送消息、图片、GIF 和表情</span>
+                            </div>
+                        </label>
+                        <input type="radio" id="channel-type-voice" name="channel-type" value="voice" class="channel-type-selector__radio">
+                        <label for="channel-type-voice" class="channel-type-selector__label">
+                            <i class="fas fa-volume-up"></i>
+                            <div class="channel-type-selector__info">
+                                <span class="channel-type-selector__title">语音频道</span>
+                                <span class="channel-type-selector__desc">进行语音通话和视频聊天</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal__input-group">
+                    <label for="channel-name-input" class="input-group__label">频道名称</label>
+                    <input type="text" id="channel-name-input" placeholder="例如：游戏交流" class="input-group__input">
+                </div>
+                <div class="modal__actions modal__actions--horizontal">
+                    <button id="create-channel-confirm-btn" class="btn-primary">创建</button>
+                    <button id="create-channel-cancel-btn" class="btn-secondary">取消</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 设置模态框 -->
+        <div id="settings-modal" class="modal">
+            <div class="modal__content">
+                <button class="settings-modal__close-btn" aria-label="关闭设置"><i class="fas fa-times"></i></button>
+                <h2 class="modal__title">用户设置</h2>
+                <p class="modal__subtitle">管理您的账户和偏好</p>
+                <div class="settings-modal__section">
+                    <h3 class="settings-modal__section-title">账户管理</h3>
+                    <div class="settings-modal__button-group">
+                        <button id="logout-btn" class="settings-modal__logout-btn">登出</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="remote-audio-container" style="display: none;"></div>
+
+    <script type="module" src="/static/js/app.js"></script>
+</body>
+</html>

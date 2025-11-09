@@ -1,0 +1,26 @@
+/* web/static/css/_stream.css */
+
+.stream-container {
+    padding: 16px;
+    background-color: var(--color-bg-primary); /* 更深的背景以突出视频 */
+    border-bottom: 1px solid var(--color-bg-accent);
+    flex-shrink: 0; /* 防止被消息列表压缩 */
+    display: flex; /* 使用 flexbox 以便居中和对齐 */
+    justify-content: center;
+    align-items: center;
+}
+
+.stream-container video {
+    width: 100%;
+    height: auto;
+    max-height: 40vh; /* 限制最大高度，避免占据过多空间 */
+    border-radius: var(--border-radius-md);
+    background-color: #000;
+}
+
+/* 添加: 本地预览视频的特殊样式 */
+.stream-container video.local-preview {
+    /* 镜像翻转，符合摄像头预览的习惯 */
+    /* 对于屏幕共享，这个效果可能需要动态移除 */
+    /* transform: scaleX(-1); */
+}

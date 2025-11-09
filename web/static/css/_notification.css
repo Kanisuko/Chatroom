@@ -1,0 +1,18 @@
+/* web/static/css/_notification.css */
+
+.notification-bar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    z-index: 1000;
+    color: white;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.notification-bar--info { background-color: #5b6eae; }
+.notification-bar--error { background-color: #c0392b; }

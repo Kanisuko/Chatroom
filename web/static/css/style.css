@@ -1,0 +1,15 @@
+/* web/static/css/style.css (修复后) */
+
+/* 统一导入所有模块化的 CSS 文件 */
+@import './_base.css';
+@import './_components.css';
+@import './_layout.css';
+@import './_sidebar.css';
+@import './_user-sidebar.css';
+@import './_chat.css'; /* 核心容器布局 */
+@import './_chat-header.css'; /* 头部样式 */
+@import './_message.css'; /* 消息列表样式 */
+@import './_chat-input.css'; /* 输入框样式 */
+@import './_stream.css'; /* 添加: 视频/屏幕共享样式 */
+@import './_modal.css';
+@import './_notification.css';

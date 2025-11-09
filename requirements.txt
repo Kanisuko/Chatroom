@@ -1,1 +1,25 @@
-pyyaml>=6.0.2
+# SimpleChannel Server Dependencies
+
+# Core asynchronous web framework and WebSocket handler
+aiohttp==3.9.5
+
+# Template rendering for aiohttp
+aiohttp-jinja2==1.6
+
+# The Jinja2 templating engine itself
+Jinja2==3.1.4
+
+# For parsing the config.yml file
+PyYAML==6.0.1
+
+# Asynchronous SQLite database driver
+aiosqlite==0.20.0
+
+# Asynchronous SMTP client for sending emails
+aiosmtplib==3.0.1
+
+# For secure password hashing
+bcrypt==4.1.3
+
+# 添加: WebRTC and ORTC implementation for Python
+aiortc==1.6.0

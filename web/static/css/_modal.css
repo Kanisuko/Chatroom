@@ -1,0 +1,209 @@
+/* web/static/css/_modal.css */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* 修改: 在登录页面，模态框是根元素，不需要 fixed 定位 */
+body:has(#auth-modal) .modal {
+    position: static; /* 移除 fixed 定位 */
+    display: flex; /* 默认显示 */
+    height: 100vh; /* 撑满视口高度 */
+}
+
+
+.modal--active {
+    display: flex;
+}
+
+.modal__content {
+    background-color: var(--color-bg-secondary);
+    width: 100%;
+    max-width: 480px;
+    border-radius: var(--border-radius-md);
+    padding: 32px;
+    box-shadow: var(--elevation-high);
+}
+
+.modal__title {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 8px;
+    color: var(--color-interactive-active);
+}
+
+.modal__subtitle {
+    text-align: center;
+    color: var(--color-text-muted);
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.modal__input-group {
+    margin-bottom: 20px;
+}
+
+.modal__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.modal__actions--horizontal {
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.modal__switch {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 14px;
+}
+
+.modal__switch-link {
+    color: var(--color-text-link);
+    text-decoration: none;
+    cursor: pointer;
+}
+.modal__switch-link:hover { text-decoration: underline; }
+
+.modal__error-message {
+    color: var(--color-text-error);
+    margin-bottom: 16px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.modal__success-message {
+    color: var(--color-status-online);
+    margin-bottom: 16px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* 设置模态框特定样式 */
+.settings-modal__section {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-bg-accent);
+}
+
+.settings-modal__section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.settings-modal__section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-interactive-active);
+    margin-bottom: 12px;
+}
+
+.settings-modal__button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.settings-modal__logout-btn {
+    background-color: var(--color-text-error);
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    align-self: flex-start;
+}
+
+.settings-modal__logout-btn:hover {
+    background-color: #e03236;
+}
+
+.settings-modal__close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+
+.settings-modal__close-btn:hover {
+    color: var(--color-interactive-hover);
+}
+
+/* 添加: 频道类型选择器样式 */
+.channel-type-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.channel-type-selector__radio {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+    position: absolute;
+}
+
+.channel-type-selector__label {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background-color: var(--color-bg-tertiary);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    border: 1px solid var(--color-bg-primary);
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.channel-type-selector__label:hover {
+    background-color: var(--color-bg-modifier-hover);
+}
+
+.channel-type-selector__radio:checked + .channel-type-selector__label {
+    background-color: var(--color-bg-modifier-active);
+    border-color: var(--color-accent-primary);
+}
+
+.channel-type-selector__label i {
+    font-size: 20px;
+    color: var(--color-interactive-normal);
+    width: 40px;
+    text-align: center;
+    margin-right: 12px;
+}
+
+.channel-type-selector__info {
+    display: flex;
+    flex-direction: column;
+}
+
+.channel-type-selector__title {
+    font-weight: 500;
+    color: var(--color-text-normal);
+}
+
+.channel-type-selector__desc {
+    font-size: 12px;
+    color: var(--color-text-muted);
+}

@@ -1,0 +1,326 @@
+/* web/static/css/_sidebar.css */
+
+.sidebar {
+    width: 240px;
+    background-color: var(--color-bg-secondary);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+/* Logo */
+.sidebar__logo {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: var(--elevation-low);
+    color: var(--color-interactive-hover);
+    flex-shrink: 0; 
+}
+
+.sidebar__logo-icon {
+    margin-right: 8px;
+}
+
+
+/* 频道列表 */
+.channel-list {
+    flex: 1;
+    padding: 10px 8px;
+    overflow-y: auto;
+}
+
+.channel-list__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+    margin-bottom: 4px;
+    height: 36px;
+}
+
+.channel-list__title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    letter-spacing: 0.5px;
+}
+
+.channel-list__add-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    width: 20px;
+    height: 20px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: all 0.15s ease;
+}
+
+.channel-list__add-btn:hover {
+    background-color: var(--color-bg-modifier-hover);
+    color: var(--color-interactive-hover);
+}
+
+.channel-list__item {
+    display: flex;
+    align-items: center;
+    padding: 6px 8px;
+    margin: 2px 0;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    color: var(--color-text-muted);
+    font-size: 16px;
+}
+
+.channel-list__item:hover {
+    background-color: var(--color-bg-modifier-hover);
+    color: var(--color-interactive-hover);
+}
+
+.channel-list__item--active {
+    background-color: var(--color-bg-modifier-active);
+    color: var(--color-interactive-active);
+}
+
+.channel-list__item-icon {
+    margin-right: 6px;
+    font-size: 14px;
+    width: 16px; 
+    text-align: center; 
+}
+
+.channel-list__item-name {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* 修改: 语音状态面板 -> 媒体控制中心 */
+.voice-status-panel {
+    background-color: var(--color-bg-primary);
+    padding: 8px;
+    border-top: 1px solid var(--color-bg-accent);
+    border-bottom: 1px solid var(--color-bg-accent);
+    display: flex;
+    flex-direction: column; /* 修改: 垂直布局 */
+    gap: 8px; /* 添加: 增加间隙 */
+}
+
+.voice-status-panel__info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; 
+}
+
+.voice-status-panel__status-text {
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+    line-height: 1.2;
+}
+
+.voice-status-panel__status-text--connecting { color: var(--color-status-idle); } 
+.voice-status-panel__status-text--connected { color: var(--color-status-online); } 
+.voice-status-panel__status-text--failed { color: var(--color-status-dnd); } 
+.voice-status-panel__status-text--disconnected { color: var(--color-text-muted); } 
+
+
+.voice-status-panel__channel-name {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+}
+
+/* 修改: 媒体控制按钮组 */
+.voice-status-panel__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 两端对齐 */
+}
+
+.voice-status-panel__control-btn {
+    background-color: var(--color-bg-tertiary);
+    border: none;
+    color: var(--color-text-muted);
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius-sm);
+    transition: all 0.15s ease;
+}
+
+.voice-status-panel__control-btn:hover {
+    background-color: var(--color-bg-accent);
+    color: var(--color-interactive-hover);
+}
+
+.voice-status-panel__control-btn--active {
+    background-color: var(--color-status-online);
+    color: white;
+}
+.voice-status-panel__control-btn--active:hover {
+    background-color: #1a8b48; /* 深绿色 */
+}
+
+
+.voice-status-panel__disconnect-btn {
+    background-color: var(--color-status-dnd);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.15s ease;
+}
+
+.voice-status-panel__disconnect-btn:hover {
+    background-color: #c0392b; /* 深红色 */
+}
+
+.user-panel {
+    background-color: var(--color-bg-tertiary);
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    height: 52px;
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+.user-panel__avatar-wrapper {
+    position: relative;
+    margin-right: 8px;
+    display: inline-block;
+}
+
+.user-panel__avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.user-panel__status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    box-sizing: border-box;
+    display: block;
+    border: 2px solid var(--color-bg-tertiary);
+}
+
+.user-panel__status--online { background-color: var(--color-status-online); }
+.user-panel__status--idle { background-color: var(--color-status-idle); }
+.user-panel__status--dnd { background-color: var(--color-status-dnd); }
+.user-panel__status--offline { background-color: var(--color-status-offline); }
+
+
+.user-panel__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-right: 4px; 
+}
+
+.user-panel__display-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-normal);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+}
+
+.user-panel__username-tag {
+    font-size: 11px;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+}
+
+.user-panel__controls {
+    display: flex;
+    gap: 4px; /* 修改: 恢复正常间距 */
+    flex-shrink: 0;
+}
+
+.user-panel__control-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    width: 28px; /* 修改: 统一尺寸 */
+    height: 28px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px; /* 修改: 统一尺寸 */
+    transition: all 0.15s ease;
+}
+
+.user-panel__control-btn:hover {
+    background-color: var(--color-bg-modifier-hover);
+    color: var(--color-interactive-hover);
+}
+
+.user-panel__control-btn--active { 
+    color: var(--color-status-online); 
+}
+
+.user-panel__control-btn--muted {
+    color: var(--color-text-error); 
+}
+
+
+.user-panel__settings-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    width: 28px;
+    height: 28px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+    margin-left: 2px; 
+}
+
+.user-panel__settings-btn:hover {
+    background-color: var(--color-bg-modifier-hover);
+    color: var(--color-interactive-hover);
+}

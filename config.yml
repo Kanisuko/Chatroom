@@ -1,5 +1,0 @@
-port: 5126
-banned_ips: []
-muted_users: []
-max_connections: 20
-log_file: server.log

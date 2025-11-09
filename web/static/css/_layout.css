@@ -1,0 +1,21 @@
+/* web/static/css/_layout.css */
+
+.app-container {
+    display: flex;
+    height: 100vh; /* 修改: 使用 vh 确保占满整个视口高度，更稳定 */
+    width: 100%;
+    overflow: hidden;
+}
+
+/* 右侧边栏隐藏状态 */
+.user-sidebar {
+    transition: width 0.3s ease, padding 0.3s ease, opacity 0.3s ease; /* 添加: opacity 过渡 */
+}
+
+.app-container--user-sidebar-hidden .user-sidebar {
+    width: 0;
+    padding-left: 0;  /* 修改: 分别控制 padding */
+    padding-right: 0;
+    opacity: 0;       /* 添加: 隐藏时透明度为0 */
+    overflow: hidden;
+}

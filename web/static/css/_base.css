@@ -1,0 +1,43 @@
+/* web/static/css/_base.css */
+
+:root {
+    --color-bg-primary: #202225;
+    --color-bg-secondary: #2f3136;
+    --color-bg-tertiary: #36393f;
+    --color-bg-accent: #3c4046;
+    --color-bg-modifier-hover: rgba(79, 84, 92, 0.16);
+    --color-bg-modifier-active: rgba(79, 84, 92, 0.24);
+    --color-text-normal: #dcddde;
+    --color-text-muted: #72767d;
+    --color-text-link: #00b0f4;
+    --color-text-error: #f04747;
+    --color-interactive-normal: #b9bbbe;
+    --color-interactive-hover: #dcddde;
+    --color-interactive-active: #ffffff;
+    --color-accent-primary: #5865f2;
+    --color-status-online: #43b581;
+    --color-status-idle: #faa61a;
+    --color-status-dnd: #f04747;
+    --color-status-offline: #747f8d;
+
+    --font-primary: 'Inter', sans-serif;
+    --border-radius-sm: 3px;
+    --border-radius-md: 5px;
+    --elevation-low: 0 1px 0 rgba(4, 4, 5, 0.2), 0 1.5px 0 rgba(6, 6, 7, 0.05), 0 2px 0 rgba(4, 4, 5, 0.05);
+    
+    --chat-avatar-size: 40px;
+    --chat-avatar-margin: 16px;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: var(--font-primary);
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-normal);
+    overflow: hidden; /* 确保根元素不会出现滚动条 */
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
